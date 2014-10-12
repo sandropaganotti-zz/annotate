@@ -1,0 +1,7 @@
+node_modules
+tmp/.rebooted
+.sass-cache
+client/components
+tmp/client
+client-dist
+.DS_Store
