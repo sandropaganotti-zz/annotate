@@ -9,6 +9,6 @@
 
   var l = document.createElement('link');
   l.rel = 'import';
-  l.href = '/base/client/webcomponents/annotable.html';
+  l.href = '/base/client/webcomponents/nn-annotable.html';
   document.head.appendChild(l);
 })();
