@@ -36,12 +36,21 @@ module.exports = function(grunt){
       }
     },
 
-    mocha: {
+    karma: {
       test: {
-        src: ['client/test/runner.html'],
         options: {
-          run: true,
-          log: true
+          frameworks: ['mocha', 'chai'],
+          files: [
+            'client/components/platform/platform.js',
+            'client/test/karma_init.js',
+            'client/test/app.js',
+
+            { pattern: 'client/components/**/*', included: false },
+            { pattern: 'client/webcomponents/**/*', included: false }
+          ],
+          browsers: ['Chrome'],
+          background: true,
+          singleRun: false
         }
       }
     },
@@ -53,7 +62,7 @@ module.exports = function(grunt){
       },
       clientTest: {
         files: ['client/**/*{.html,.js}'],
-        tasks: ['mocha']
+        tasks: ['karma:test:run']
       },
       buildSass: {
         files: ['client/scss/*'],
@@ -130,7 +139,7 @@ module.exports = function(grunt){
 
   });
 
-   grunt.registerTask('default', ['concurrent']);
+   grunt.registerTask('default', ['karma:test:start','concurrent']);
    grunt.registerTask('build', ['ngAnnotate', 'sass:dist', 'uglify', 'processhtml']);
 
 };
