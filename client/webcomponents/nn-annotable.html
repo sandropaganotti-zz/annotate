@@ -1,12 +1,25 @@
 
 <link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-ajax/core-ajax.html">
 
-<polymer-element name="nn-annotable">
+<polymer-element name="nn-annotable" attributes="nid">
   <template>
+    <core-ajax
+      id="get_comments"
+      url="/api/{{domain}}/{{nid}}/comments"
+      handleAs="json"
+      on-core-response="{{populateComments}}"
+      >
+    </core-ajax>
     <content></content>
-    <h2>Annotations</h2>
+    <section>
+      <h2>Annotations</h2>
+      <template repeat="{{comment, i in comments}}">
+        <article>
+          {{comment.body}}
+        </article>
+      </template>
+    </section>
   </template>
-  <script>
-    Polymer();
-  </script>
+  <script src="nn-annotable.js"></script>
 </polymer-element>

@@ -18,10 +18,12 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.4.2"
+    "polymer": "Polymer/polymer#~0.4.2",
+    "core-ajax": "Polymer/core-ajax#~0.4.2"
   },
   "devDependencies": {
     "mocha": "~1.20.1",
-    "chai": "~1.9.1"
+    "chai": "~1.9.1",
+    "mock-ajax": "git@github.com:PolymerLabs/mock-ajax.git"
   }
 }

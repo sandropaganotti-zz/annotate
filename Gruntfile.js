@@ -39,16 +39,18 @@ module.exports = function(grunt){
     karma: {
       test: {
         options: {
-          frameworks: ['mocha', 'chai'],
+          frameworks: ['mocha', 'sinon-chai'],
           files: [
             'client/components/platform/platform.js',
             'client/test/karma_init.js',
+            'client/test/utils.js',
             'client/test/app.js',
 
             { pattern: 'client/components/**/*', included: false },
             { pattern: 'client/webcomponents/**/*', included: false }
           ],
           browsers: ['Chrome'],
+          reporters: 'spec',
           background: true,
           singleRun: false
         }
