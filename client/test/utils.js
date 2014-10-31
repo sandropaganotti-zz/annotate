@@ -1,7 +1,7 @@
 
 function setResponse(object){
   MockAjax = {
-    latency: 1,
+    latency: 0,
     response: JSON.stringify(object)
   };
 }

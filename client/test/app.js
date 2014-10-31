@@ -26,7 +26,7 @@ describe("annotable", function(){
       expect(annotable.domain).to.be.equal(window.location.hostname);
     });
 
-    describe('comments retrieval', function(){
+    describe('business logic', function(){
 
       beforeEach(function(){
         setResponse([{user: 'sandro', body: 'nice!'}]);
@@ -41,12 +41,60 @@ describe("annotable", function(){
         annotable.attached();
       });
 
-      it("displays the list of retrieved comments", function(done){
+
+      it("retrieves data from the form and translate it into JSON", function(){
+        var new_comment = annotable.shadowRoot.querySelector('#new_comment');
+        annotable.body = 'some text';
+        annotable.author = 'sandro.paganotti@gmail.com';
+        expect(new_comment.params).to.be.equal(JSON.stringify({
+          author: annotable.author,
+          body: annotable.body
+        }));
+      });
+
+      it("dont send a new comment if author or body is not present", function(){
+        setResponse({});
+        annotable.newComment({preventDefault: function(){}});
+        expect(annotable.message).to.be.equal('completa tutti i campi');
+      });
+
+      it("does send a new comment if author and body is present", function(done){
+        setResponse({});
+        annotable.resetForm = function(){ done(); };
+        annotable.body = 'some text';
+        annotable.author = 'sandro.paganotti@gmail.com';
+        annotable.newComment({preventDefault: function(){}});
+      });
+
+    });
+
+    describe('template building', function(){
+
+      beforeEach(function(done){
+        setResponse([{author: 'sandro', body: 'nice!'}]);
+        annotable.nid = 1234;
         document.body.appendChild(annotable);
+        setTimeout(done, 200);
+      });
+
+      it("displays the list of retrieved comments", function(){
+        expect(annotable.shadowRoot.querySelector('article').textContent).to.contain('nice!');
+      });
+
+      it("displays a new comment when receiving a socket ping", function(done){
+        var websocket = annotable.shadowRoot.querySelector('#websocket');
+        websocket._onwsmessage({data: JSON.stringify({
+          author: 'someone',
+          body: 'text from websocket'
+        })});
         setTimeout(function(){
-          expect(annotable.shadowRoot.querySelector('article').textContent).to.contain.text('nice!');
+          expect(annotable.shadowRoot.querySelector('article:last-child').textContent).to.contain('websocket');
           done();
-        }, 0);
+        }, 200);
+      });
+
+      afterEach(function(){
+        document.body.removeChild(annotable);
       });
 
     });
