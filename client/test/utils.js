@@ -1,3 +1,5 @@
+/* global MockAjax:true */
+/* exported setResponse */
 
 function setResponse(object){
   MockAjax = {

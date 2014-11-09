@@ -1,6 +1,8 @@
+/* jshint camelcase:false */
+
 Polymer('nn-annotable', {
   created: function(){
-    this.domain = window.location.hostname
+    this.domain = window.location.hostname;
   },
 
   attached: function(){

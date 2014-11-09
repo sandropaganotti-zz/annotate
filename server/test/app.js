@@ -1,3 +1,6 @@
+/* global describe:false, it:false, beforeEach:false */
+/* jshint expr:true */
+
 process.env.NODE_ENV = 'test';
 
 var app = require('./../app');
@@ -5,7 +8,7 @@ var expect = require('chai').expect;
 var request = require('supertest');
 var mongoose = require('mongoose');
 var File = require('../models/file');
-var clearDB  = require('mocha-mongoose')(app.get('db'));
+// var clearDB  = require('mocha-mongoose')(app.get('db'));
 
 describe('remoteStorage basic behavior', function(){
 
@@ -33,7 +36,6 @@ describe('remoteStorage basic behavior', function(){
         }).end(done);
       });
     });
-
-  })
+  });
 
 });
