@@ -2,6 +2,7 @@ var express = require('express');
 var app = module.exports = express();
 var mongoose = require('mongoose');
 var environment = require('./config/env')();
+var Comment = require('./models/comment');
 
 app.set('port', environment.port);
 app.set('db', environment.db);
@@ -12,6 +13,18 @@ app.get('/', function(req, res) {
 
 app.get('/db', function(req, res) {
   res.send((mongoose.connection.readyState === 1) ? 200 : 503);
+});
+
+app.get('/:domain/:reference/comments', function(req, res) {
+  Comment.find(
+    {domain: req.param('domain'), reference: req.param('reference')},
+    function(err, comments) {
+      if (err) {
+        return res.status(500);
+      }
+      res.status(200).json(comments);
+    }
+  );
 });
 
 app.use(express.static(__dirname +

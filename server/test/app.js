@@ -1,4 +1,4 @@
-/* global describe:false, it:false, beforeEach:false */
+/* global describe:false, it:false, before:false */
 /* jshint expr:true */
 
 process.env.NODE_ENV = 'test';
@@ -20,7 +20,10 @@ describe('server', function() {
 
   describe('mongodb', function() {
 
-    beforeEach(function(done) {
+    before(function(done) {
+      if (mongoose.connection.db) {
+        return done();
+      }
       mongoose.connect(app.get('db'), done);
     });
 
