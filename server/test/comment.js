@@ -37,4 +37,24 @@ describe('comment resource', function() {
       );
     });
   });
+
+  describe('POST /:domain/:resource/comments', function() {
+    it('adds a comment to a :reference in a :domain', function(done) {
+      request(app).post('/example.com/42/comments')
+        .send({text: 'some text', email: 'gabriele.lana@example.com'})
+        .expect(201)
+        .expect('Content-Type', /json/)
+        .expect('Location', /\/example.com\/42\/comments\/[0-9a-f]+/)
+        .end(function(err, res) {
+          if (err) {
+            throw err;
+          }
+          Comment.findOne({_id: JSON.parse(res.text).id}, function(err, comment) {
+            expect(err).to.be.null;
+            expect(comment).to.be.an.instanceof(Comment);
+            done();
+          });
+        });
+    });
+  });
 });

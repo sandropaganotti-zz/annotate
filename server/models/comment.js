@@ -19,6 +19,11 @@ module.exports = mongoose.model(
       }
     });
 
+
+    Comment.method('location', function() {
+      return ['', this.domain, this.reference, 'comments', this.id].join('/');
+    });
+
     return Comment;
 
   })(new mongoose.Schema())

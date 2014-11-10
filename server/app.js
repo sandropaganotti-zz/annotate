@@ -27,6 +27,29 @@ app.get('/:domain/:reference/comments', function(req, res) {
   );
 });
 
+app.post(
+  '/:domain/:reference/comments',
+  require('body-parser').json(),
+  function(req, res) {
+    Comment.create(
+      { domain: req.param('domain'),
+        reference: req.param('reference'),
+        email: req.body.email,
+        text: req.body.text,
+      },
+      function(err, comment) {
+        if (err) {
+          return res.status(500);
+        }
+        res
+          .status(201)
+          .location(comment.location())
+          .json(comment);
+      }
+    );
+  }
+);
+
 app.use(express.static(__dirname +
   (process.env.NODE_ENV === 'dist' ? '/../client-dist' : '/../client')
 ));
