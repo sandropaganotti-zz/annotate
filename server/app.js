@@ -10,10 +10,8 @@ app.get('/', function(req, res) {
   res.send('Hello World');
 });
 
-app.get('/db/collections', function(req, res) {
-  mongoose.connection.db.collectionNames(function(err, names) {
-    res.json(JSON.stringify({collections: names}));
-  });
+app.get('/db', function(req, res) {
+  res.send((mongoose.connection.readyState === 1) ? 200 : 503);
 });
 
 app.use(express.static(__dirname +

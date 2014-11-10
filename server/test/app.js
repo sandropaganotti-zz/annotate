@@ -25,7 +25,7 @@ describe('server', function() {
     });
 
     it('is connected', function(done) {
-      request(app).get('/db/collections').expect(200, done);
+      request(app).get('/db').expect(200, done);
     });
   });
 });
