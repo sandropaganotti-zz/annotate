@@ -5,10 +5,10 @@ module.exports = mongoose.model(
   (function(Comment) {
 
     Comment.add({
-      domain: String,
-      reference: String,
-      email: String,
-      text: String,
+      domain: {type: String, required: true},
+      reference: {type: String, required: true},
+      email: {type: String, required: true},
+      text: {type: String, required: true},
     });
 
     Comment.set('toJSON', {

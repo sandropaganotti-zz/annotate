@@ -56,5 +56,12 @@ describe('comment resource', function() {
           });
         });
     });
+
+    it('replies with 400 when text is missing', function(done) {
+      request(app).post('/example.com/42/comments')
+        .send({email: 'gabriele.lana@example.com'})
+        .expect(400)
+        .end(done);
+    });
   });
 });

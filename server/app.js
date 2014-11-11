@@ -39,6 +39,9 @@ app.post(
       },
       function(err, comment) {
         if (err) {
+          if (err.name === 'ValidationError') {
+            return res.status(400).json(err.errors);
+          }
           return res.status(500);
         }
         res
