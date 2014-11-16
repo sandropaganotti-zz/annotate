@@ -30,7 +30,7 @@ app.get('/:domain/:reference/comments', ensureRequestComesFromRightDomain, funct
     {domain: req.param('domain'), reference: req.param('reference')},
     function(err, comments) {
       if (err) {
-        return res.status(500);
+        return res.send(500);
       }
       res.status(200).json(comments);
     }
@@ -53,7 +53,7 @@ app.post(
           if (err.name === 'ValidationError') {
             return res.status(400).json(err.errors);
           }
-          return res.status(500);
+          return res.send(500);
         }
         res
           .status(201)
