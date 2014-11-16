@@ -36,6 +36,13 @@ describe('comment resource', function() {
         }
       );
     });
+
+    it('fails with 403 when request comes from wrong domain', function(done) {
+      request(app).get('/example.com/42/comments')
+        .set('Host', 'evil.com')
+        .expect(403)
+        .end(done);
+    });
   });
 
   describe('POST /:domain/:resource/comments', function() {
@@ -57,10 +64,18 @@ describe('comment resource', function() {
         });
     });
 
-    it('replies with 400 when text is missing', function(done) {
+    it('fails with 400 when text is missing', function(done) {
       request(app).post('/example.com/42/comments')
         .send({email: 'gabriele.lana@example.com'})
         .expect(400)
+        .end(done);
+    });
+
+    it('fails with 403 when request comes from wrong domain', function(done) {
+      request(app).post('/example.com/42/comments')
+        .send({text: 'some text', email: 'gabriele.lana@example.com'})
+        .set('Host', 'evil.com')
+        .expect(403)
         .end(done);
     });
   });

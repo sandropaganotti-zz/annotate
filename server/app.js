@@ -4,6 +4,16 @@ var mongoose = require('mongoose');
 var environment = require('./config/env')();
 var Comment = require('./models/comment');
 
+var ensureRequestComesFromRightDomain = function(req, res, next) {
+  if (req.hostname === req.param('domain')) {
+    return next();
+  }
+  if (req.hostname === '127.0.0.1') {
+    return next();
+  }
+  res.send(403);
+};
+
 app.set('port', environment.port);
 app.set('db', environment.db);
 
@@ -15,7 +25,7 @@ app.get('/db', function(req, res) {
   res.send((mongoose.connection.readyState === 1) ? 200 : 503);
 });
 
-app.get('/:domain/:reference/comments', function(req, res) {
+app.get('/:domain/:reference/comments', ensureRequestComesFromRightDomain, function(req, res) {
   Comment.find(
     {domain: req.param('domain'), reference: req.param('reference')},
     function(err, comments) {
@@ -29,6 +39,7 @@ app.get('/:domain/:reference/comments', function(req, res) {
 
 app.post(
   '/:domain/:reference/comments',
+  ensureRequestComesFromRightDomain,
   require('body-parser').json(),
   function(req, res) {
     Comment.create(
