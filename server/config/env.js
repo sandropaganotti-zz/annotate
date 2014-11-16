@@ -1,13 +1,10 @@
-module.exports = function() {
+module.exports = function(app) {
   switch(process.env.NODE_ENV) {
     case 'test':
-      return {
-        db: 'mongodb://localhost/annotate-test'
-      };
+      app.set('db', 'mongodb://localhost/annotate-test');
+      break;
     default:
-      return {
-        port: process.env.PORT || 3000,
-        db: process.env.MONGODB_URL || 'mongodb://localhost/annotate'
-      };
+      app.set('port', process.env.PORT || 3000);
+      app.set('db', 'mongodb://localhost/annotate');
   }
 };

@@ -1,8 +1,10 @@
 var express = require('express');
 var app = module.exports = express();
+var configure = require('./config/env');
 var mongoose = require('mongoose');
-var environment = require('./config/env')();
 var Comment = require('./models/comment');
+
+configure(app);
 
 var ensureRequestComesFromRightDomain = function(req, res, next) {
   if (req.hostname === req.param('domain')) {
@@ -13,9 +15,6 @@ var ensureRequestComesFromRightDomain = function(req, res, next) {
   }
   res.send(403);
 };
-
-app.set('port', environment.port);
-app.set('db', environment.db);
 
 app.get('/', function(req, res) {
   res.send('Hello World');
