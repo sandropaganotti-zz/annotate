@@ -11,7 +11,8 @@ var server = require('http').createServer(app);
 var primus = new Primus(server, {transformer: 'websockets'});
 
 primus.on('connection', function(spark) {
-  console.log('connected', spark.id);
+  var domain = spark.request.headers.host.split(':')[0];
+  console.log('connected', spark.id, '@domain', domain);
   setTimeout(function() {
     spark.write({
       author: spark.id + '@example.com',
