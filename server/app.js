@@ -2,9 +2,27 @@ var express = require('express');
 var app = module.exports = express();
 var configure = require('./config/env');
 var mongoose = require('mongoose');
+var Primus = require('primus');
 var Comment = require('./models/comment');
 
 configure(app);
+
+var server = require('http').createServer(app);
+var primus = new Primus(server, {transformer: 'websockets'});
+
+primus.on('connection', function(spark) {
+  console.log('connected', spark.id);
+  setTimeout(function() {
+    spark.write({
+      author: spark.id + '@example.com',
+      text: 'sent from the server',
+    });
+  }, 2000);
+});
+
+primus.on('disconnection', function(spark) {
+  console.log('disctonnected', spark.id);
+});
 
 var ensureRequestComesFromRightDomain = function(req, res, next) {
   if (req.hostname === req.param('domain')) {
@@ -64,6 +82,7 @@ app.post(
   }
 );
 
+
 app.use(express.static(__dirname +
   (process.env.NODE_ENV === 'dist' ? '/../client-dist' : '/../client')
 ));
@@ -71,8 +90,8 @@ app.use(express.static(__dirname +
 
 if (require.main === module) {
   mongoose.connect(app.get('db'), function() {
-    var server = app.listen(3000, function() {
-      console.log('Listening on port %d', server.address().port);
+    server.listen(3000, function() {
+      console.log('Listening on port %d', app.get('port'));
     });
   });
 }
