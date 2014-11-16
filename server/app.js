@@ -40,11 +40,12 @@ app.post(
   '/:domain/:reference/comments',
   ensureRequestComesFromRightDomain,
   require('body-parser').json(),
+  require('body-parser').urlencoded(),
   function(req, res) {
     Comment.create(
       { domain: req.param('domain'),
         reference: req.param('reference'),
-        email: req.body.email,
+        author: req.body.author,
         text: req.body.text,
       },
       function(err, comment) {

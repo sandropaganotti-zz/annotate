@@ -7,7 +7,7 @@ module.exports = mongoose.model(
     Comment.add({
       domain: {type: String, required: true},
       reference: {type: String, required: true},
-      email: {type: String, required: true},
+      author: {type: String, required: true},
       text: {type: String, required: true},
     });
 

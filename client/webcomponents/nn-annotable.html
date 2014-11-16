@@ -8,17 +8,17 @@
 
     <core-ajax
       id="get_comments"
-      url="/api/{{domain}}/{{nid}}/comments"
+      url="/{{domain}}/{{nid}}/comments"
       handleAs="json"
       on-core-response="{{populateComments}}"
       >
     </core-ajax>
     <core-ajax
       id="new_comment"
-      url="/api/{{domain}}/{{nid}}/comments"
+      url="/{{domain}}/{{nid}}/comments"
       handleAs="json"
       method="post"
-      params='{"author":"{{author}}","body":"{{body}}"}'
+      params='{"author":"{{author}}","text":"{{text}}"}'
       on-core-response="{{resetForm}}"
       >
     </core-ajax>
@@ -35,14 +35,14 @@
       <form id="new_comment_form" on-submit="{{newComment}}">
         <p>{{message}}</p>
         <input type="email" value="{{author}}" placeholder="your email"><br/>
-        <textarea value="{{body}}" placeholder="your annotation"></textarea><br/>
+        <textarea value="{{text}}" placeholder="your annotation"></textarea><br/>
         <input type="submit" value="invia">
       </form>
       <h2>Annotations</h2>
       <template repeat="{{comment, i in comments}}">
         <article>
           <h3>{{comment.author}}</h3>
-          <div>{{comment.body}}</div>
+          <div>{{comment.text}}</div>
         </article>
       </template>
     </section>

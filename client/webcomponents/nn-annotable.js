@@ -24,7 +24,7 @@ Polymer('nn-annotable', {
   newComment: function(evt){
     this.message = '';
     evt.preventDefault();
-    if(!this.author || !this.body){
+    if(!this.author || !this.text){
       this.message = 'completa tutti i campi';
       return;
     }
