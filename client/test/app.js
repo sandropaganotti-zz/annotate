@@ -32,13 +32,13 @@ describe('annotable', function(){
     describe('business logic', function(){
 
       beforeEach(function(){
-        setResponse([{user: 'sandro', body: 'nice!'}]);
+        setResponse([{user: 'sandro', text: 'nice!'}]);
         annotable.nid = 1234;
       });
 
       it('should retrieve the list of current comments', function(done){
         annotable.populateComments = function(evt){
-          expect(evt.detail.response[0].body).to.be.equal('nice!');
+          expect(evt.detail.response[0].text).to.be.equal('nice!');
           done();
         };
         annotable.attached();
@@ -47,24 +47,24 @@ describe('annotable', function(){
 
       it('retrieves data from the form and translate it into JSON', function(){
         var newComment = annotable.shadowRoot.querySelector('#new_comment');
-        annotable.body = 'some text';
+        annotable.text = 'some text';
         annotable.author = 'sandro.paganotti@gmail.com';
         expect(newComment.params).to.be.equal(JSON.stringify({
           author: annotable.author,
-          body: annotable.body
+          text: annotable.text
         }));
       });
 
-      it('dont send a new comment if author or body is not present', function(){
+      it('dont send a new comment if author or text is not present', function(){
         setResponse({});
         annotable.newComment({preventDefault: function(){}});
         expect(annotable.message).to.be.equal('completa tutti i campi');
       });
 
-      it('does send a new comment if author and body is present', function(done){
+      it('does send a new comment if author and text is present', function(done){
         setResponse({});
         annotable.resetForm = function(){ done(); };
-        annotable.body = 'some text';
+        annotable.text = 'some text';
         annotable.author = 'sandro.paganotti@gmail.com';
         annotable.newComment({preventDefault: function(){}});
       });
@@ -74,7 +74,7 @@ describe('annotable', function(){
     describe('template building', function(){
 
       beforeEach(function(done){
-        setResponse([{author: 'sandro', body: 'nice!'}]);
+        setResponse([{author: 'sandro', text: 'nice!'}]);
         annotable.nid = 1234;
         document.body.appendChild(annotable);
         setTimeout(done, 200);
@@ -88,7 +88,7 @@ describe('annotable', function(){
         var websocket = annotable.shadowRoot.querySelector('#websocket');
         websocket._onwsmessage({data: JSON.stringify({
           author: 'someone',
-          body: 'text from websocket'
+          text: 'text from websocket'
         })});
         setTimeout(function(){
           expect(annotable.shadowRoot.querySelector('article:last-child').textContent).to.contain('websocket');
