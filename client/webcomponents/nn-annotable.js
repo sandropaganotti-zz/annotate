@@ -3,6 +3,7 @@
 Polymer('nn-annotable', {
   created: function(){
     this.domain = window.location.hostname;
+    this.port = window.location.port;
   },
 
   attached: function(){
