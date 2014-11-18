@@ -11,15 +11,7 @@ var server = require('http').createServer(app);
 var primus = new Primus(server, {transformer: 'websockets'});
 
 primus.use('rooms', require('primus-rooms'));
-
-primus.use('hostname', {
-  server: function(primus, options) {
-    primus.on('connection', function(spark) {
-      spark.hostname = spark.request.headers.host.split(':')[0];
-    });
-  }
-});
-
+primus.use('hostname', require('./modules/primus-hostname'));
 primus.on('connection', function(spark) {
   console.log('connected', spark.id, '@domain', spark.hostname);
   spark.join(spark.hostname);
