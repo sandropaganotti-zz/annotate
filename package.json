@@ -22,6 +22,7 @@
     "mongoose": "~3.8.13",
     "morgan": "^1.5.0",
     "primus": "^2.4.10",
+    "primus-rooms": "^3.1.0",
     "ws": "^0.4.32"
   },
   "devDependencies": {
