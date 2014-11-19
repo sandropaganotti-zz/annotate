@@ -10,15 +10,11 @@ configure(app);
 var server = require('http').createServer(app);
 var primus = new Primus(server, {transformer: 'websockets'});
 
+primus.use('rooms', require('primus-rooms'));
+primus.use('hostname', require('./modules/primus-hostname'));
 primus.on('connection', function(spark) {
-  var domain = spark.request.headers.host.split(':')[0];
-  console.log('connected', spark.id, '@domain', domain);
-  setTimeout(function() {
-    spark.write({
-      author: 'sandro.paganotti@gmail.com',
-      text: 'sent from the server',
-    });
-  }, 2000);
+  console.log('connected', spark.id, '@domain', spark.hostname);
+  spark.join(spark.hostname);
 });
 
 primus.on('disconnection', function(spark) {
@@ -74,6 +70,10 @@ app.post(
           }
           return res.send(500);
         }
+        primus.room(comment.domain).write({
+          author: comment.author,
+          text: comment.text,
+        });
         res
           .status(201)
           .location(comment.location())
