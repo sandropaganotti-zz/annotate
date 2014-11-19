@@ -5,3 +5,4 @@ client/components
 tmp/client
 client-dist
 .DS_Store
+nn-annotable.html

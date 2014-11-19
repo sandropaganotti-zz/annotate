@@ -4,10 +4,10 @@
 <link rel="import" href="../components/x-websocket/dist/x-websocket.html">
 <link rel="import" href="../components/gravatar-image/src/gravatar.html">
 
-<polymer-element name="nn-annotable" attributes="nid">
+<polymer-element name="nn-annotable" attributes="nid baseapi">
   <template>
 
-    <link rel="stylesheet" href="../../components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../components/bootstrap/dist/css/bootstrap.css">
 
     <style>
       .bg-warning{ padding: 10px; }
@@ -15,14 +15,14 @@
 
     <core-ajax
       id="get_comments"
-      url="/{{domain}}/{{nid}}/comments"
+      url="http://{{baseapi}}/{{domain}}/{{nid}}/comments"
       handleAs="json"
       on-core-response="{{populateComments}}"
       >
     </core-ajax>
     <core-ajax
       id="new_comment"
-      url="/{{domain}}/{{nid}}/comments"
+      url="http://{{baseapi}}/{{domain}}/{{nid}}/comments"
       handleAs="json"
       method="post"
       params='{"author":"{{author}}","text":"{{text}}"}'
@@ -32,7 +32,7 @@
     <x-websocket
       id="websocket"
       json="true"
-      url="ws://{{domain}}:{{port}}/primus">
+      url="ws://{{baseapi}}:{{port}}/primus">
     </x-websocket>
 
     <content></content>

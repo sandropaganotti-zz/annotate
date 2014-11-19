@@ -81,7 +81,18 @@ module.exports = function(grunt){
           logConcurrentOutput: true
         }
       }
-    }
+    },
+
+    vulcanize: {
+      dist: {
+        options: {
+          inline: true
+        },
+        files: {
+          'client/nn-annotable.html': 'client/webcomponents/nn-annotable.html'
+        }
+      }
+    },
 
   });
 

@@ -16,7 +16,7 @@ describe('annotable', function(){
     });
 
     it('enrich the content with the comments section', function(){
-      expect(annotable.shadowRoot.querySelector('h2')).to.exist;
+      expect(annotable.shadowRoot.querySelector('h3')).to.exist;
     });
 
     it('should have a nid attribute once attached', function(){
@@ -81,7 +81,7 @@ describe('annotable', function(){
       });
 
       it('displays the list of retrieved comments', function(){
-        expect(annotable.shadowRoot.querySelector('article').textContent).to.contain('nice!');
+        expect(annotable.shadowRoot.querySelector('dd').textContent).to.contain('nice!');
       });
 
       it('displays a new comment when receiving a socket ping', function(done){
@@ -91,7 +91,7 @@ describe('annotable', function(){
           text: 'text from websocket'
         })});
         setTimeout(function(){
-          expect(annotable.shadowRoot.querySelector('article:last-child').textContent).to.contain('websocket');
+          expect(annotable.shadowRoot.querySelector('.row:last-child dd').textContent).to.contain('websocket');
           done();
         }, 200);
       });
