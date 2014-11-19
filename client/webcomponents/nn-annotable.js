@@ -4,6 +4,7 @@ Polymer('nn-annotable', {
   created: function(){
     this.domain = window.location.hostname;
     this.port = window.location.port;
+    this.comments = [];
   },
 
   attached: function(){
@@ -19,6 +20,7 @@ Polymer('nn-annotable', {
   },
 
   updateComments: function(evt){
+    console.log(evt.detail.data);
     this.comments.push(evt.detail.data);
   },
 

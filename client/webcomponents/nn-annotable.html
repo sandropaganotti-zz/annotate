@@ -2,9 +2,16 @@
 <link rel="import" href="../components/polymer/polymer.html">
 <link rel="import" href="../components/core-ajax/core-ajax.html">
 <link rel="import" href="../components/x-websocket/dist/x-websocket.html">
+<link rel="import" href="../components/gravatar-image/src/gravatar.html">
 
 <polymer-element name="nn-annotable" attributes="nid">
   <template>
+
+    <link rel="stylesheet" href="../../components/bootstrap/dist/css/bootstrap.css">
+
+    <style>
+      .bg-warning{ padding: 10px; }
+    </style>
 
     <core-ajax
       id="get_comments"
@@ -30,22 +37,40 @@
 
     <content></content>
 
-    <section>
-      <h2>New Annotation</h2>
+    <section class="annotation-form">
+      <h3>New Annotation</h3>
       <form id="new_comment_form" on-submit="{{newComment}}">
-        <p>{{message}}</p>
-        <input type="email" value="{{author}}" placeholder="your email"><br/>
-        <textarea value="{{text}}" placeholder="your annotation"></textarea><br/>
-        <input type="submit" value="invia">
+        <template bind if="{{message}}">
+          <p class="bg-warning">{{message}}</p>
+        </template>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input id="email" class="form-control" type="email" value="{{author}}" placeholder="your email">
+        </div>
+        <div class="form-group">
+          <label for="annotation">Annotation</label>
+          <textarea id="annotation" rows="3" class="form-control" value="{{text}}" placeholder="your annotation"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Invia</button>
       </form>
-      <h2>Annotations</h2>
-      <template repeat="{{comment, i in comments}}">
-        <article>
-          <h3>{{comment.author}}</h3>
-          <div>{{comment.text}}</div>
-        </article>
+    </section>
+    <section class="annotation-list">
+      <template bind if="{{comments.length > 0}}">
+        <h3>Annotations</h3>
+        <template repeat="{{comment, i in comments}}">
+          <div class="row">
+            <div class="col-xs-2">
+              <gravatar-image username="{{comment.author}}"></gravatar-image>
+            </div>
+            <dl class="col-xs-10">
+              <dt>{{comment.author}}</dt>
+              <dd>{{comment.text}}</dd>
+            </dl>
+          </div>
+        </template>
       </template>
     </section>
+
 
   </template>
   <script src="nn-annotable.js"></script>

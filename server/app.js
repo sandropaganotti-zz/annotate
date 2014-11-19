@@ -15,7 +15,7 @@ primus.on('connection', function(spark) {
   console.log('connected', spark.id, '@domain', domain);
   setTimeout(function() {
     spark.write({
-      author: spark.id + '@example.com',
+      author: 'sandro.paganotti@gmail.com',
       text: 'sent from the server',
     });
   }, 2000);

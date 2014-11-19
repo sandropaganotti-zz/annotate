@@ -1,33 +1,66 @@
 <!doctype html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>An annotable example</title>
     <script src="components/platform/platform.js"></script>
     <link rel="import" href="webcomponents/nn-annotable.html">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   </head>
   <body>
 
-    <nn-annotable nid="1234">
-      <p>
-        Alice cominciava a sentirsi assai stanca di sedere sul poggetto accanto a sua sorella, senza
-        far niente: aveva una o due volte data un'occhiata al libro che la sorella stava leggendo, ma non
-        v'erano nè dialoghi nè figure, — e a che serve un libro, pensò Alice, — senza dialoghi nè figure?
-      </p>
-      <p>
-        E si domandava alla meglio, (perchè la canicola l'aveva mezza assonnata e istupidita), se per
-        il piacere di fare una ghirlanda di margherite mettesse conto di levarsi a raccogliere i fiori,
-        quand'ecco un coniglio bianco dagli occhi rosei passarle accanto, quasi sfiorandola.
-      </p>
-      <p>
-        Non c'era troppo da meravigliarsene, nè Alice pensò che fosse troppo strano sentir parlare il
-        Coniglio, il quale diceva fra se: “Oimè! oimè! ho fatto tardi!” (quando in seguito ella se ne ricordò,
-        s'accorse che avrebbe dovuto meravigliarsene, ma allora le sembrò una cosa naturalissima): ma
-        quando il Coniglio trasse un orologio dal taschino della sottoveste e lo consultò, e si mise a
-        scappare, Alice saltò in piedi pensando di non aver mai visto un coniglio con la sottoveste e il
-        taschino, nè con un orologio da cavar fuori, e, ardente di curiosità, traversò il campo correndogli
-        appresso e arrivò appena in tempo per vederlo entrare in una spaziosa conigliera sotto la siepe.
-      </p>
-    </nn-annotable>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-xs-6">
+        <h1> ANNOTABLE </h1>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-xs-6">
+        <p class="lead">
+          Aggiungi automaticamente un blocco commenti ai contenuti della tua pagina
+        </p>
+        <h3>Istruzioni:</h3>
+        <ol>
+          <li>Aggiungi <a href="https://www.polymer-project.org/">Polymer</a> al tuo sito web</li>
+          <li>Aggiungi questo tag nell'<code>&lt;head&gt;</code> della pagina:
+            <pre>&lt;link rel="import" href="webcomponents/nn-annotable.html"&gt;</pre>
+          </li>
+          <li>Includi la porzione di pagina che desideri rendere annotabile all'interno
+              di un blocco come il seguente, l'attributo <code>nid</code> deve essere univoco per il dominio:
+            <pre>&lt;nn-annotable nid="1234"&gt;Your content&lt;/nn-annotable&gt;</pre>
+          </li>
+          <li>Fatto!
+          </li>
+        </ol>
+        <h3>Configurazione</h3>
+        <p> Puoi modificare la parte di form e la parte contenente la lista dei commenti
+            utilizzando questi due selettori CSS come nell'esempio qui sotto:
+        </p>
+        <pre>
+nn-annotable::shadow .annotation-form {
+  background: red;
+}
+nn-annotable::shadow .annotation-list {
+  font-size: 1.2rem;
+}</pre>
+      </div>
+
+      <div class="col-xs-6">
+        <h3>Esempio:</h3>
+        <nn-annotable nid="1234">
+          <p>
+            Alice cominciava a sentirsi assai stanca di sedere sul poggetto accanto a sua sorella, senza
+            far niente: aveva una o due volte data un'occhiata al libro che la sorella stava leggendo, ma non
+            v'erano nè dialoghi nè figure, — e a che serve un libro, pensò Alice, — senza dialoghi nè figure?
+          </p>
+        </nn-annotable>
+      </div>
+
+  </div>
 
   </body>
 </html>

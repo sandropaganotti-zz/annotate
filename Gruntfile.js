@@ -66,10 +66,6 @@ module.exports = function(grunt){
         files: ['client/**/*{.html,.js}'],
         tasks: ['karma:test:run']
       },
-      buildSass: {
-        files: ['client/scss/*'],
-        tasks: ['sass:dev']
-      },
       livereload: {
         files: ['client/**/*','tmp/.rebooted','tmp/css/*'],
         options: {
@@ -85,63 +81,10 @@ module.exports = function(grunt){
           logConcurrentOutput: true
         }
       }
-    },
-
-    sass: {
-      dev: {
-        files: {
-          'client/css/app.css': 'client/scss/app.scss'
-        },
-        options: {
-          sourcemap: true
-        }
-      },
-      dist: {
-        files: {
-          'client-dist/app.css': 'client/scss/app.scss'
-        },
-        options: {
-          style: 'compressed'
-        }
-      }
-    },
-
-    ngAnnotate: {
-      dist: {
-        files: {
-          'tmp/client/app.js': [
-            'client/js/app.js',
-            'client/js/factories/*.js',
-            'client/js/directives/*.js',
-            'client/js/controllers/*.js'
-          ]
-        }
-      }
-    },
-
-    uglify: {
-      dist: {
-        files: {
-          'client-dist/app.js': [
-            'client/components/angular/angular.js',
-            'client/components/angular-resource/angular-resource.js',
-            'tmp/client/app.js'
-          ]
-        }
-      }
-    },
-
-    processhtml: {
-      dist: {
-        files: {
-          'client-dist/index.html': ['client/index.html']
-        }
-      }
     }
 
   });
 
-   grunt.registerTask('default', ['karma:test:start','concurrent']);
-   grunt.registerTask('build', ['ngAnnotate', 'sass:dist', 'uglify', 'processhtml']);
+  grunt.registerTask('default', ['karma:test:start','concurrent']);
 
 };
