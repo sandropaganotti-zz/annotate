@@ -20,8 +20,7 @@ Polymer('nn-annotable', {
   },
 
   updateComments: function(evt){
-    console.log(evt.detail.data);
-    this.comments.push(evt.detail.data);
+    this.comments.push(evt.detail);
   },
 
   newComment: function(evt){

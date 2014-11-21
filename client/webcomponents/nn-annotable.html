@@ -3,6 +3,7 @@
 <link rel="import" href="../components/core-ajax/core-ajax.html">
 <link rel="import" href="../components/x-websocket/dist/x-websocket.html">
 <link rel="import" href="../components/gravatar-image/src/gravatar.html">
+<link rel="import" href="./x-primus.html">
 
 <polymer-element name="nn-annotable" attributes="nid baseapi">
   <template>
@@ -29,11 +30,8 @@
       on-core-response="{{resetForm}}"
       >
     </core-ajax>
-    <x-websocket
-      id="websocket"
-      json="true"
-      url="ws://{{baseapi}}:{{port}}/primus">
-    </x-websocket>
+    <x-primus id='websocket'>
+    </x-primus>
 
     <content></content>
 

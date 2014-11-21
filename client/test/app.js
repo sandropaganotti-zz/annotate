@@ -86,10 +86,11 @@ describe('annotable', function(){
 
       it('displays a new comment when receiving a socket ping', function(done){
         var websocket = annotable.shadowRoot.querySelector('#websocket');
-        websocket._onwsmessage({data: JSON.stringify({
+        websocket.setAttribute('url', 'ws://localhost:3000/primus');
+        websocket._onwsmessage({
           author: 'someone',
           text: 'text from websocket'
-        })});
+        });
         setTimeout(function(){
           expect(annotable.shadowRoot.querySelector('.row:last-child dd').textContent).to.contain('websocket');
           done();
