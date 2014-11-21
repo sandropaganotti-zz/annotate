@@ -2,9 +2,8 @@
 
 Polymer('nn-annotable', {
   created: function(){
-    this.baseapi = this.baseapi || 'localhost';
+    this.baseapi = this.baseapi || window.location.origin;
     this.domain = window.location.hostname;
-    this.port = window.location.port;
     this.comments = [];
   },
 

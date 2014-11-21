@@ -15,14 +15,14 @@
 
     <core-ajax
       id="get_comments"
-      url="http://{{baseapi}}/{{domain}}/{{nid}}/comments"
+      url="{{baseapi}}/{{domain}}/{{nid}}/comments"
       handleAs="json"
       on-core-response="{{populateComments}}"
       >
     </core-ajax>
     <core-ajax
       id="new_comment"
-      url="http://{{baseapi}}/{{domain}}/{{nid}}/comments"
+      url="{{baseapi}}/{{domain}}/{{nid}}/comments"
       handleAs="json"
       method="post"
       params='{"author":"{{author}}","text":"{{text}}"}'
