@@ -11,6 +11,8 @@ module.exports = mongoose.model(
       text: {type: String, required: true},
     });
 
+    Comment.plugin(require('mongoose-eventful'));
+
     Comment.set('toJSON', {
       virtuals: true,
       transform: function(doc, ret) {

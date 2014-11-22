@@ -70,10 +70,6 @@ app.post(
           }
           return res.send(500);
         }
-        primus.room(comment.domain).write({
-          author: comment.author,
-          text: comment.text,
-        });
         res
           .status(201)
           .location(comment.location())
@@ -83,6 +79,12 @@ app.post(
   }
 );
 
+Comment.on('created', function(comment) {
+  primus.room(comment.domain).write({
+    author: comment.author,
+    text: comment.text,
+  });
+});
 
 app.use(express.static(__dirname +
   (process.env.NODE_ENV === 'dist' ? '/../client-dist' : '/../client')
