@@ -5,7 +5,7 @@
 <link rel="import" href="../components/gravatar-image/src/gravatar.html">
 <link rel="import" href="./x-primus.html">
 
-<polymer-element name="nn-annotable" attributes="nid baseapi">
+<polymer-element name="nn-annotable" attributes="nid baseapi connect">
   <template>
 
     <link rel="stylesheet" href="../components/bootstrap/dist/css/bootstrap.css">
@@ -30,7 +30,10 @@
       on-core-response="{{resetForm}}"
       >
     </core-ajax>
-    <x-primus id='websocket'>
+    <x-primus
+      id='websocket'
+      connect="{{connect}}"
+      >
     </x-primus>
 
     <content></content>

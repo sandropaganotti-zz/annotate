@@ -76,6 +76,7 @@ describe('annotable', function(){
       beforeEach(function(done){
         setResponse([{author: 'sandro', text: 'nice!'}]);
         annotable.nid = 1234;
+        annotable.connect = false;
         document.body.appendChild(annotable);
         setTimeout(done, 200);
       });
@@ -86,8 +87,7 @@ describe('annotable', function(){
 
       it('displays a new comment when receiving a socket ping', function(done){
         var websocket = annotable.shadowRoot.querySelector('#websocket');
-        websocket.setAttribute('url', 'ws://localhost:3000/primus');
-        websocket._onwsmessage({
+        websocket._onMessage({
           author: 'someone',
           text: 'text from websocket'
         });

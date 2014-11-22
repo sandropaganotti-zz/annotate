@@ -2,17 +2,20 @@
 
 Polymer('x-primus', {
   created: function() {
-    this.url = this.url || ('ws://' + window.location.host + '/primus');
-    this.connect = (this.connect === undefined) ? true : false;
+    this.url = this.url || 'ws://' + window.location.host + '/primus';
+    this.connect = (this.connect !== undefined) ? this.connect : true;
   },
-  ready: function() {
-    this.primus = new Primus();
-    this.primus.on('data', this._onwsmessage.bind(this));
+  attached: function() {
+    this.primus = new Primus(this.url, {manual: true});
+    this.primus.on('data', this._onMessage.bind(this));
+    if (this.connect) {
+      this._doConnect();
+    }
   },
-  attributeChanged: function(name, old, current) {
-    console.log(name, 'changed', old, current);
+  _doConnect: function() {
+    this.primus.open();
   },
-  _onwsmessage: function(message) {
+  _onMessage: function(message) {
     this.fire('message', message);
-  }
+  },
 });

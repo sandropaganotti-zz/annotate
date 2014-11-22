@@ -4,6 +4,7 @@ Polymer('nn-annotable', {
   created: function(){
     this.baseapi = this.baseapi || window.location.origin;
     this.domain = window.location.hostname;
+    this.connect = (this.connect !== undefined) ? this.connect : true;
     this.comments = [];
   },
 
