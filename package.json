@@ -1,5 +1,5 @@
 {
-  "name": "anootate",
+  "name": "annotate",
   "version": "1.0.0",
   "description": "Write and share notes on an existing text",
   "main": "server/app.js",
