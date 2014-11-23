@@ -1,5 +1,5 @@
 {
-  "name": "anootate",
+  "name": "annotate",
   "version": "1.0.0",
   "description": "Write and share notes on an existing text",
   "main": "server/app.js",
@@ -49,5 +49,8 @@
     "mocha-mongoose": "^1.0.1",
     "mongodb": "^1.4.7",
     "supertest": "^0.13.0"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
