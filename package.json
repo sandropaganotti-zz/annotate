@@ -48,5 +48,8 @@
     "mocha-mongoose": "^1.0.1",
     "mongodb": "^1.4.7",
     "supertest": "^0.13.0"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
