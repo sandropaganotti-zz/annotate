@@ -70,10 +70,6 @@ app.post(
           }
           return res.send(500);
         }
-        primus.room(comment.domain).write({
-          author: comment.author,
-          text: comment.text,
-        });
         res
           .status(201)
           .location(comment.location())
@@ -83,6 +79,12 @@ app.post(
   }
 );
 
+Comment.on('created', function(comment) {
+  primus.room(comment.domain).write({
+    author: comment.author,
+    text: comment.text,
+  });
+});
 
 app.use(express.static(__dirname +
   (process.env.NODE_ENV === 'dist' ? '/../client-dist' : '/../client')
@@ -91,7 +93,7 @@ app.use(express.static(__dirname +
 
 if (require.main === module) {
   mongoose.connect(app.get('db'), function() {
-    server.listen(3000, function() {
+    server.listen(app.get('port'), function() {
       console.log('Listening on port %d', app.get('port'));
     });
   });

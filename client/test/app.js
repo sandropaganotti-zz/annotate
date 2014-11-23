@@ -76,6 +76,7 @@ describe('annotable', function(){
       beforeEach(function(done){
         setResponse([{author: 'sandro', text: 'nice!'}]);
         annotable.nid = 1234;
+        annotable.connect = false;
         document.body.appendChild(annotable);
         setTimeout(done, 200);
       });
@@ -86,10 +87,10 @@ describe('annotable', function(){
 
       it('displays a new comment when receiving a socket ping', function(done){
         var websocket = annotable.shadowRoot.querySelector('#websocket');
-        websocket._onwsmessage({data: JSON.stringify({
+        websocket._onMessage({
           author: 'someone',
           text: 'text from websocket'
-        })});
+        });
         setTimeout(function(){
           expect(annotable.shadowRoot.querySelector('.row:last-child dd').textContent).to.contain('websocket');
           done();

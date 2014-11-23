@@ -1,10 +1,10 @@
 
 <link rel="import" href="../components/polymer/polymer.html">
 <link rel="import" href="../components/core-ajax/core-ajax.html">
-<link rel="import" href="../components/x-websocket/dist/x-websocket.html">
 <link rel="import" href="../components/gravatar-image/src/gravatar.html">
+<link rel="import" href="./x-primus.html">
 
-<polymer-element name="nn-annotable" attributes="nid baseapi">
+<polymer-element name="nn-annotable" attributes="nid baseapi connect">
   <template>
 
     <link rel="stylesheet" href="../components/bootstrap/dist/css/bootstrap.css">
@@ -15,25 +15,25 @@
 
     <core-ajax
       id="get_comments"
-      url="http://{{baseapi}}/{{domain}}/{{nid}}/comments"
+      url="{{baseapi}}/{{domain}}/{{nid}}/comments"
       handleAs="json"
       on-core-response="{{populateComments}}"
       >
     </core-ajax>
     <core-ajax
       id="new_comment"
-      url="http://{{baseapi}}/{{domain}}/{{nid}}/comments"
+      url="{{baseapi}}/{{domain}}/{{nid}}/comments"
       handleAs="json"
       method="post"
       params='{"author":"{{author}}","text":"{{text}}"}'
       on-core-response="{{resetForm}}"
       >
     </core-ajax>
-    <x-websocket
-      id="websocket"
-      json="true"
-      url="ws://{{baseapi}}:{{port}}/primus">
-    </x-websocket>
+    <x-primus
+      id='websocket'
+      connect="{{connect}}"
+      >
+    </x-primus>
 
     <content></content>
 

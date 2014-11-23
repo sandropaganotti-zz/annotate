@@ -2,9 +2,9 @@
 
 Polymer('nn-annotable', {
   created: function(){
-    this.baseapi = this.baseapi || 'localhost';
+    this.baseapi = this.baseapi || window.location.origin;
     this.domain = window.location.hostname;
-    this.port = window.location.port;
+    this.connect = (this.connect !== undefined) ? this.connect : true;
     this.comments = [];
   },
 
@@ -21,8 +21,7 @@ Polymer('nn-annotable', {
   },
 
   updateComments: function(evt){
-    console.log(evt.detail.data);
-    this.comments.push(evt.detail.data);
+    this.comments.push(evt.detail);
   },
 
   newComment: function(evt){
