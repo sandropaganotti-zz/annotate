@@ -3,5 +3,9 @@
   "description": "Write and share notes on an existing text",
   "repository": "https://github.com/sandropaganotti/annotate.git",
   "keywords": ["nodejs", "webcomponents"],
-  "addons": ["mongolab"]
+  "addons": ["mongolab"],
+  "scripts": {
+    "postdeploy": "grunt vulcanize"
+  },
+  "success_url": "/index.html"
 }
