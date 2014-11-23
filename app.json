@@ -1,0 +1,7 @@
+{
+  "name": "annotate",
+  "description": "Write and share notes on an existing text",
+  "repository": "https://github.com/sandropaganotti/annotate.git",
+  "keywords": ["nodejs", "webcomponents"],
+  "addons": ["mongolab"]
+}
