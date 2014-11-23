@@ -2,7 +2,15 @@
   "name": "codemotion-annotate",
   "description": "Write and share notes on an existing text",
   "repository": "https://github.com/sandropaganotti/annotate.git",
-  "keywords": ["nodejs", "webcomponents"],
-  "addons": ["mongolab"],
-  "success_url": "/index.html"
+  "keywords": [
+    "nodejs",
+    "webcomponents"
+  ],
+  "addons": [
+    "mongolab:sandbox"
+  ],
+  "success_url": "/index.html",
+  "env": {
+    "BUILDPACK_URL": "https://github.com/mbuchetics/heroku-buildpack-nodejs-grunt.git"
+  }
 }
