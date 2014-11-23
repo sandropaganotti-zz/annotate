@@ -97,5 +97,5 @@ module.exports = function(grunt){
   });
 
   grunt.registerTask('default', ['karma:test:start','concurrent']);
-
+  grunt.registerTask('heroku', ['vulcanize']);
 };

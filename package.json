@@ -4,7 +4,7 @@
   "description": "Write and share notes on an existing text",
   "main": "server/app.js",
   "scripts": {
-    "postinstall": "bower install --production && ./node_modules/grunt-cli/bin/grunt vulcanize"
+    "postinstall": "bower install --production"
   },
   "repository": {
     "type": "git",
