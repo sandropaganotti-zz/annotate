@@ -4,8 +4,8 @@
   "repository": "https://github.com/sandropaganotti/annotate.git",
   "keywords": ["nodejs", "webcomponents"],
   "addons": ["mongolab"],
-  "scripts": {
-    "postdeploy": "grunt vulcanize"
+  "env": {
+    "BUILDPACK_URL": "https://github.com/mbuchetics/heroku-buildpack-nodejs-grunt.git"
   },
   "success_url": "/index.html"
 }
