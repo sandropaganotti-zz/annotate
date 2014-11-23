@@ -93,7 +93,7 @@ app.use(express.static(__dirname +
 
 if (require.main === module) {
   mongoose.connect(app.get('db'), function() {
-    server.listen(3000, function() {
+    server.listen(app.get('port'), function() {
       console.log('Listening on port %d', app.get('port'));
     });
   });
