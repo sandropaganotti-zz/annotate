@@ -1,0 +1,17 @@
+{
+  "name": "Annotate",
+  "description": "Annotate, a small Web Component to add comments to your website",
+  "success_url": "/index.html",
+  "keywords": [
+    "webcomponents",
+    "polymer",
+    "nodejs"
+  ],
+  "scripts": {
+    "postdeploy": "grunt vulcanize"
+  },
+  "addons": [
+    "mongolab:shared-single-small"
+  ],
+  "env": {}
+}
