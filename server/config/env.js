@@ -6,6 +6,9 @@ module.exports = function(app) {
     default:
       app.use(require('morgan')('combined'));
       app.set('port', process.env.PORT || 3000);
-      app.set('db', 'mongodb://localhost/annotate');
+      app.set('db',
+               process.env.MONGOLAB_URI ||
+               process.env.MONGOHQ_URL ||
+              'mongodb://localhost/annotate');
   }
 };
