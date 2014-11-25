@@ -3,6 +3,8 @@
 Polymer('nn-annotable', {
   created: function(){
     this.baseapi = this.baseapi || window.location.origin;
+    this.tokens = this.baseapi.split('://');
+    this.wsurl = this.tokens.shift() === 'https' ? 'wss' : 'ws' + '://' + this.tokens.shift();
     this.domain = window.location.hostname;
     this.connect = (this.connect !== undefined) ? this.connect : true;
     this.comments = [];
@@ -35,6 +37,6 @@ Polymer('nn-annotable', {
   },
 
   resetForm: function(){
-    this.$.new_comment_form.reset();
+    this.author = this.text = '';
   }
 });

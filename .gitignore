@@ -1,5 +1,5 @@
 node_modules
-tmp/.rebooted
+.rebooted
 .sass-cache
 client/components
 tmp/client

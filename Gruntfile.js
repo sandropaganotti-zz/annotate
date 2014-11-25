@@ -12,7 +12,7 @@ module.exports = function(grunt){
           watch: ['server'],
           callback: function(nodemon){
             nodemon.on('restart', function(){
-              require('fs').writeFileSync('tmp/.rebooted','rebooted');
+              require('fs').writeFileSync('.rebooted','rebooted');
             });
           }
         }
@@ -67,7 +67,7 @@ module.exports = function(grunt){
         tasks: ['karma:test:run']
       },
       livereload: {
-        files: ['client/**/*','tmp/.rebooted','tmp/css/*'],
+        files: ['client/**/*','.rebooted','tmp/css/*'],
         options: {
           livereload: true
         }
