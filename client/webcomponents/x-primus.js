@@ -2,7 +2,7 @@
 
 Polymer('x-primus', {
   created: function() {
-    this.url = this.url || 'ws://' + window.location.host + '/primus';
+    this.url = this.url || this._defaultURL();
     this.connect = (this.connect !== undefined) ? this.connect : true;
   },
   attached: function() {
@@ -18,4 +18,11 @@ Polymer('x-primus', {
   _onMessage: function(message) {
     this.fire('message', message);
   },
+  _defaultURL: function() {
+    return [
+      (window.location.protocol === 'http:') ? 'ws:/' : 'wss:/',
+      window.location.host,
+      'primus'
+    ].join('/');
+  }
 });
