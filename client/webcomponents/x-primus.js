@@ -1,7 +1,7 @@
 /* global Primus:false */
 
 Polymer('x-primus', {
-  created: function() {
+  ready: function() {
     this.url = this.url || this._defaultURL();
     this.connect = (this.connect !== undefined) ? this.connect : true;
   },

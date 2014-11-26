@@ -1,4 +1,4 @@
-/* global describe:false, it:false, expect:false, beforeEach:false, afterEach:false, setResponse:false */
+/* global setResponse: false */
 /* jshint expr:true */
 
 describe('annotable', function(){
