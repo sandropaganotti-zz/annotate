@@ -22,7 +22,11 @@ primus.on('disconnection', function(spark) {
 });
 
 var ensureRequestComesFromRightDomain = function(req, res, next) {
-  if (req.hostname === req.param('domain')) {
+  var origin = req.hostname;
+  if (req.headers.origin) {
+    origin = require('url').parse(req.headers.origin).hostname;
+  }
+  if (origin === req.param('domain')) {
     return next();
   }
   if (req.hostname === '127.0.0.1') {
