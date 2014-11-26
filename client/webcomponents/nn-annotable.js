@@ -1,7 +1,7 @@
 /* jshint camelcase:false */
 
 Polymer('nn-annotable', {
-  created: function(){
+  ready: function(){
     this.baseapi = this.baseapi || window.location.origin;
     this.tokens = this.baseapi.split('://');
     this.wsurl = this.tokens.shift() === 'https' ? 'wss' : 'ws' + '://' + this.tokens.shift();
