@@ -1,4 +1,3 @@
-/* global describe:false, it:false, before:false */
 /* jshint expr:true */
 
 process.env.NODE_ENV = 'test';

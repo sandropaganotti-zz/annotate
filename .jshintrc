@@ -19,6 +19,14 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
-    "Polymer": false
+    "Polymer": false,
+    "describe": false,
+    "xdescribe": false,
+    "before": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "expect": false,
+    "it": false,
+    "xit": false
   }
 }
