@@ -1,11 +1,12 @@
 <link rel="import" href="../components/polymer/polymer.html">
-<polymer-element name="x-primus" attributes="url connect">
+<polymer-element name="x-primus" attributes="baseapi connect">
   <template>
     <style>
       :host {
         display: none;
       }
     </style>
+    <a href="{{baseapi}}" id="parser"></a>
   </template>
   <script src="primus.js"></script>
   <script src="x-primus.js"></script>

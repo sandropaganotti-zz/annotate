@@ -3,8 +3,6 @@
 Polymer('nn-annotable', {
   ready: function(){
     this.baseapi = this.baseapi || window.location.origin;
-    this.tokens = this.baseapi.split('://');
-    this.wsurl = (this.tokens.shift() === 'https' ? 'wss' : 'ws') + '://' + this.tokens.shift();
     this.domain = window.location.hostname;
     this.connect = (this.connect !== undefined) ? this.connect : true;
     this.comments = [];

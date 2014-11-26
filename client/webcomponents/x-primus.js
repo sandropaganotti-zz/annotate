@@ -2,7 +2,13 @@
 
 Polymer('x-primus', {
   ready: function() {
-    this.url = this.url || this._defaultURL();
+    var host = window.location.host;
+    var protocol = window.location.protocol;
+    if(this.baseapi){
+      var host = this.$.parser.hostname;
+      var protocol = this.$.parser.protocol;
+    }
+    this.url = this._defaultURL(protocol, host);
     this.connect = (this.connect !== undefined) ? this.connect : true;
   },
   attached: function() {
@@ -18,11 +24,9 @@ Polymer('x-primus', {
   _onMessage: function(message) {
     this.fire('message', message);
   },
-  _defaultURL: function() {
+  _defaultURL: function(protocol, host) {
     return [
-      (window.location.protocol === 'http:') ? 'ws:/' : 'wss:/',
-      window.location.host,
-      'primus'
+      (protocol === 'http:') ? 'ws:/' : 'wss:/', host ,'primus'
     ].join('/');
   }
 });
