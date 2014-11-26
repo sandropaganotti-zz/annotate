@@ -23,7 +23,7 @@ describe('comment resource', function() {
   });
 
   describe('GET /:domain/:resource/comments', function() {
-    it('list all comments related to a :reference in a :domain', function(done) {
+    xit('list all comments related to a :reference in a :domain', function(done) {
       Comment.create(
         {domain: 'example.com', reference: 42, author: 'gabriele.lana@example.com', text: '42'},
         function(err, comment) {
@@ -36,7 +36,7 @@ describe('comment resource', function() {
       );
     });
 
-    it('fails with 403 when request comes from wrong domain', function(done) {
+    xit('fails with 403 when request comes from wrong domain', function(done) {
       request(app).get('/example.com/42/comments')
         .set('Host', 'evil.com')
         .expect(403)
@@ -45,7 +45,7 @@ describe('comment resource', function() {
   });
 
   describe('POST /:domain/:resource/comments', function() {
-    it('adds a comment to a :reference in a :domain', function(done) {
+    xit('adds a comment to a :reference in a :domain', function(done) {
       request(app).post('/example.com/42/comments')
         .send({text: 'some text', author: 'gabriele.lana@example.com'})
         .expect(201)
@@ -63,14 +63,14 @@ describe('comment resource', function() {
         });
     });
 
-    it('fails with 400 when text is missing', function(done) {
+    xit('fails with 400 when text is missing', function(done) {
       request(app).post('/example.com/42/comments')
         .send({author: 'gabriele.lana@example.com'})
         .expect(400)
         .end(done);
     });
 
-    it('fails with 403 when request comes from wrong domain', function(done) {
+    xit('fails with 403 when request comes from wrong domain', function(done) {
       request(app).post('/example.com/42/comments')
         .send({text: 'some text', author: 'gabriele.lana@example.com'})
         .set('Host', 'evil.com')
