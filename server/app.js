@@ -32,7 +32,7 @@ var ensureRequestComesFromRightDomain = function(req, res, next) {
   if (req.hostname === '127.0.0.1') {
     return next();
   }
-  res.send(403);
+  res.status(403).send();
 };
 
 app.get('/', function(req, res) {
@@ -40,7 +40,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/db', function(req, res) {
-  res.send((mongoose.connection.readyState === 1) ? 200 : 503);
+  res.status((mongoose.connection.readyState === 1) ? 200 : 503).send();
 });
 
 app.get('/:domain/:reference/comments', ensureRequestComesFromRightDomain, function(req, res) {
@@ -48,7 +48,7 @@ app.get('/:domain/:reference/comments', ensureRequestComesFromRightDomain, funct
     {domain: req.param('domain'), reference: req.param('reference')},
     function(err, comments) {
       if (err) {
-        return res.send(500);
+        return res.status(500).send();
       }
       res.status(200).json(comments);
     }
@@ -72,7 +72,7 @@ app.post(
           if (err.name === 'ValidationError') {
             return res.status(400).json(err.errors);
           }
-          return res.send(500);
+          return res.status(500).send();
         }
         res
           .status(201)
