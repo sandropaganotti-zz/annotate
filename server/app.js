@@ -18,7 +18,7 @@ primus.on('connection', function(spark) {
 });
 
 primus.on('disconnection', function(spark) {
-  console.log('disctonnected', spark.id);
+  console.log('disconnected', spark.id);
 });
 
 var ensureRequestComesFromRightDomain = function(req, res, next) {
