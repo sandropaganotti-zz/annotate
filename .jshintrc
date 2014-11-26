@@ -25,7 +25,7 @@
     "before": false,
     "beforeEach": false,
     "afterEach": false,
-    "expect": false,
+    "expect": true,
     "it": false,
     "xit": false
   }
