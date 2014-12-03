@@ -80,10 +80,7 @@ Comment.on('created', function(comment) {
   });
 });
 
-app.use(express.static(__dirname +
-  (process.env.NODE_ENV === 'dist' ? '/../client-dist' : '/../client')
-));
-
+app.use(express.static(__dirname + '/../client'));
 
 if (require.main === module) {
   mongoose.connect(app.get('db'), function() {
