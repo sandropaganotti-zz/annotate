@@ -21,20 +21,6 @@ primus.on('disconnection', function(spark) {
   console.log('disconnected', spark.id);
 });
 
-var ensureRequestComesFromRightDomain = function(req, res, next) {
-  var origin = req.hostname;
-  if (req.headers.origin) {
-    origin = require('url').parse(req.headers.origin).hostname;
-  }
-  if (origin === req.param('domain')) {
-    return next();
-  }
-  if (req.hostname === '127.0.0.1') {
-    return next();
-  }
-  res.status(403).send();
-};
-
 app.get('/', function(req, res) {
   res.send('Hello World');
 });
@@ -43,21 +29,25 @@ app.get('/db', function(req, res) {
   res.status((mongoose.connection.readyState === 1) ? 200 : 503).send();
 });
 
-app.get('/:domain/:reference/comments', ensureRequestComesFromRightDomain, function(req, res) {
-  Comment.find(
-    {domain: req.param('domain'), reference: req.param('reference')},
-    function(err, comments) {
-      if (err) {
-        return res.status(500).send();
+app.get(
+  '/:domain/:reference/comments',
+  require('./modules/request-from-right-domain'),
+  function(req, res) {
+    Comment.find(
+      {domain: req.param('domain'), reference: req.param('reference')},
+      function(err, comments) {
+        if (err) {
+          return res.status(500).send();
+        }
+        res.status(200).json(comments);
       }
-      res.status(200).json(comments);
-    }
-  );
-});
+    );
+  }
+);
 
 app.post(
   '/:domain/:reference/comments',
-  ensureRequestComesFromRightDomain,
+  require('./modules/request-from-right-domain'),
   require('body-parser').json(),
   require('body-parser').urlencoded({extended: false}),
   function(req, res) {
