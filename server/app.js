@@ -75,6 +75,7 @@ app.post(
 
 Comment.on('created', function(comment) {
   primus.room(comment.domain).write({
+    reference: comment.reference,
     author: comment.author,
     text: comment.text,
   });

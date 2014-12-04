@@ -21,7 +21,9 @@ Polymer('nn-annotable', {
   },
 
   updateComments: function(evt){
-    this.comments.push(evt.detail);
+    if (evt.detail.reference === this.nid) {
+      this.comments.push(evt.detail);
+    }
   },
 
   newComment: function(evt){

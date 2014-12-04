@@ -88,11 +88,25 @@ describe('annotable', function(){
       it('displays a new comment when receiving a socket ping', function(done){
         var websocket = annotable.shadowRoot.querySelector('#websocket');
         websocket._onMessage({
+          reference: annotable.nid,
           author: 'someone',
-          text: 'text from websocket'
+          text: 'text from websocket',
         });
         setTimeout(function(){
           expect(annotable.shadowRoot.querySelector('.row:last-child dd').textContent).to.contain('websocket');
+          done();
+        }, 200);
+      });
+
+      it('does not display a new comment with another nid', function(done){
+        var websocket = annotable.shadowRoot.querySelector('#websocket');
+        websocket._onMessage({
+          reference: annotable.nid + 1,
+          author: 'someone',
+          text: 'text from websocket',
+        });
+        setTimeout(function(){
+          expect(annotable.shadowRoot.querySelector('.row:last-child dd').textContent).to.not.contain('websocket');
           done();
         }, 200);
       });
